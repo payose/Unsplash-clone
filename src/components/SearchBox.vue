@@ -22,9 +22,3 @@ defineProps({
 });
 defineEmits(['update:modelValue']);
 </script>
-
-<style>
-
-
-
-</style>

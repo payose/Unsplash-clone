@@ -52,6 +52,7 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -75,6 +76,10 @@ const getOptimizedImageUrl = (urls) => {
   return urls.full;
 };
 
+onMounted(()=>{
+    document.querySelector('.swiper-wrapper').style.alignItems = 'center';
+});
+
 const modules = [Navigation];
 
 </script>
@@ -83,9 +88,6 @@ const modules = [Navigation];
 .carousel-container {
     width: 100%;
     margin: 0 auto;
-}
-.swiper-wrapper {
-    align-items: center !important;
 }
 
 .swiper-button-prev,
