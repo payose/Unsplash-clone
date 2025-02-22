@@ -90,6 +90,7 @@ const loadInitialSearch = async () => {
 const openModal = (photo) => {
     selectedPhoto.value = photo;
     selectedPhotoIndex.value = photos.value.findIndex(p => p.id === photo.id);
+    document.body.style.overflow = 'hidden'; 
 };
 
 const closeModal = () => {

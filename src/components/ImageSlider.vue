@@ -49,58 +49,21 @@ const modules = [Navigation];
 
 </script>
 
-<style>
+<style scoped>
 .carousel-container {
     width: 100%;
     margin: 0 auto;
 }
 
-.swiper-slide {
+.swiper-wrapper {
     align-items: center !important;
-}
 
-.featured-image {
-    position: relative;
-    width: max-content;
-    max-width: 80vw;
-    height: 100%;
-    /* max-height: 90vh; */
-    overflow: hidden;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    margin: auto;
-}
-
-.featured-image img {
-    width: 100%;
-    max-width: 80vw;
-    height: 100%;
-    max-height: 70vh;
-    object-fit: contain;
-}
-
-.slider-photo-info {
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 2rem 2rem;
-    text-align: left;
-    color: #0d1b3fd6;
-
-    p{
-        padding-top: 9px;
-    }
 }
 
 .swiper-button-prev,
 .swiper-button-next {
     color: #555555;
-    background: #ffffff;
+    background: #e0e0e0;
     width: 40px;
     height: 40px;
     border-radius: 50%;
