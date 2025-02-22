@@ -26,7 +26,7 @@ To set up the project locally, follow these steps:
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/payose/unsplash-clone.git
+git clone https://github.com/payose/Unsplash-clone.git
 cd unsplash-clone
 ```
 
