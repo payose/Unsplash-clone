@@ -13,7 +13,17 @@
         >
             <swiper-slide v-for="photo in photos" :key="photo.id" class="swiper-slide">
                 <div class="featured-image">
-                    <img :src="photo.urls.full" :alt="photo.description || 'Image'">
+                    <img 
+                        :src="getOptimizedImageUrl(photo.urls)"
+                        :srcset="`
+                            ${photo.urls.small} 400w,
+                            ${photo.urls.regular} 1080w,
+                            ${photo.urls.full} 2048w
+                        `"
+                        
+                        sizes="(max-width: 400px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                        :alt="photo.description || 'Image'"
+                    />
                     <div class="slider-photo-info">
                         <h3>{{ photo.user.name || 'Unknown Author' }}</h3>
                         <p class="location">{{ photo.user.location || 'Unknown Location' }}</p>
@@ -44,6 +54,13 @@ defineProps({
         default: 0
     }
 });
+
+const getOptimizedImageUrl = (urls) => {
+  const viewportWidth = window.innerWidth;
+  if (viewportWidth < 768) return urls.small;
+  if (viewportWidth < 1200) return urls.regular;
+  return urls.full;
+};
 
 const modules = [Navigation];
 
