@@ -32,9 +32,11 @@
             </masonry-wall>
         </main>
 
-        <div v-if="selectedPhoto" class="modal">
-            <Slider :photos="photos" :initialPhoto="selectedPhotoIndex" @close="closeModal" />
-        </div>
+        <Transition name="modal-fade">
+            <div v-if="selectedPhoto" class="modal">
+                <Slider :photos="photos" :initialPhoto="selectedPhotoIndex" @close="closeModal" />
+            </div>
+        </Transition>
     </div>
 </template>
 
@@ -66,7 +68,7 @@ const fetchPhotos = async () => {
         photos.value = response.results;
         hasSearched.value = true;
     } catch (err) {
-        console.error(`Failed to load images of ${searchQuery.value}`, err);
+        console.error(`Failed to load ${searchQuery.value} images`, err);
     } finally {
         loading.value = false;
     }
@@ -81,7 +83,7 @@ const loadInitialSearch = async () => {
         displayedSearchQuery.value = defaultSearch;
         initialSearchComplete.value = true;
     } catch (err) {
-        console.error(`Failed to load images of ${defaultSearch}`, err);
+        console.error(`Failed to load ${defaultSearch} images`, err);
     } finally {
         loading.value = false;
     }
@@ -100,3 +102,16 @@ const closeModal = () => {
 
 onMounted(loadInitialSearch);
 </script>
+
+<style>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
+</style>
