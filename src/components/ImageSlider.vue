@@ -1,13 +1,26 @@
 <template>
     <div class="carousel-container">
         <swiper 
-            :slidesPerView="1" 
-            :centeredSlides="true" 
+        :slidesPerView="1" 
+            :centeredSlides="true"
             :navigation="{
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev'
-            }" 
+            }"
+            :keyboard="{
+                enabled: true
+            }"
             :modules="modules"
+            :grabCursor="true"
+            :effect="'creative'"
+            :creativeEffect="{
+                prev: {
+                    translate: ['-100%', 0, -1],
+                },
+                next: {
+                    translate: ['100%', 0, 0],
+                },
+            }"
             :initialSlide="initialPhoto"
             class="main-swiper"
         >
@@ -71,10 +84,8 @@ const modules = [Navigation];
     width: 100%;
     margin: 0 auto;
 }
-
 .swiper-wrapper {
     align-items: center !important;
-
 }
 
 .swiper-button-prev,
