@@ -18,8 +18,8 @@
         </header>
         <main class="photo-grid">
             <div v-if="loading" class="loading-grid">
-                <div v-for="n in 12" :key="n" class="loading-item">
-                    <div class="loading-placeholder"></div>
+                <div v-for="n in 8" :key="n">
+                    <SkeletonLoader />
                 </div>
             </div>
 
@@ -32,108 +32,70 @@
             </masonry-wall>
         </main>
 
-        <!-- Photo Modal -->
         <div v-if="selectedPhoto" class="modal">
-            <Slider :photos="photos" :initialSlide="selectedPhotoIndex" @close="closeModal" />
+            <Slider :photos="photos" :initialPhoto="selectedPhotoIndex" @close="closeModal" />
         </div>
     </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from 'vue';
 import MasonryWall from '@yeger/vue-masonry-wall';
 import ImageCard from './components/ImageCard.vue';
 import SearchBox from './components/SearchBox.vue';
 import Slider from './components/ImageSlider.vue';
 import { searchPhotos } from './services/apiClient.js';
+import SkeletonLoader from './components/SkeletonLoader.vue';
 
-export default {
-    name: 'App',
-    components: {
-        MasonryWall,
-        ImageCard,
-        SearchBox,
-        Slider
-    },
+const photos = ref([]);
+const loading = ref(true);
+const searchQuery = ref('');
+const selectedPhoto = ref(null);
+const selectedPhotoIndex = ref(0);
 
-    setup() {
-        const photos = ref([]);
-        const loading = ref(true);
-        const searchQuery = ref('');
-        const selectedPhoto = ref(null);
-        const selectedPhotoIndex = ref(0);
+const displayedSearchQuery = ref('');
+const hasSearched = ref(false);
+const initialSearchComplete = ref(false);
+const defaultSearch = 'africans';
 
-        const displayedSearchQuery = ref('');
-        const hasSearched = ref(false);
-        // const page = ref(1);
-        
-        const initialSearchComplete = ref(false);
-        const defaultSearch = 'africans';
-
-        const fetchPhotos = async() => {
-            if (!searchQuery.value) return;
-            loading.value = true;
-            try {
-                const response = await searchPhotos(searchQuery.value);
-                photos.value = response.results;
-                hasSearched.value = true;
-
-            } catch (err) {
-                err.value = 'Search failed';
-                console.error(err);
-            } finally {
-                loading.value = false;
-            }
-        }
-
-        const loadInitialSearch = async () => {
-            if (initialSearchComplete.value) return;
-
-            try {
-                loading.value = true;
-                const response = await searchPhotos(defaultSearch);
-               
-                photos.value = response.results;
-                displayedSearchQuery.value = defaultSearch;
-                initialSearchComplete.value = true;
-
-            } catch (error) {
-                console.error('Error loading initial photos:', error);
-
-            } finally {
-                loading.value = false;
-            }
-        };
-
-        // const openModal = (photo) => {
-        //     selectedPhoto.value = photo
-        //     document.body.style.overflow = 'hidden'
-        // }
-
-        const openModal = (photo) => {
-            selectedPhoto.value = photo;
-            selectedPhotoIndex.value = photos.value.findIndex(p => p.id === photo.id);
-        };
-
-        const closeModal = () => {
-            selectedPhoto.value = null
-            document.body.style.overflow = 'auto'
-        }
-
-        onMounted(loadInitialSearch)
-
-        return {
-            photos,
-            loading,
-            searchQuery,
-            selectedPhoto,
-            searchPhotos,
-            openModal,
-            closeModal,
-            displayedSearchQuery,
-            hasSearched,
-            fetchPhotos
-        }
+const fetchPhotos = async () => {
+    if (!searchQuery.value) return;
+    loading.value = true;
+    try {
+        const response = await searchPhotos(searchQuery.value);
+        photos.value = response.results;
+        hasSearched.value = true;
+    } catch (err) {
+        console.error('Search failed:', err);
+    } finally {
+        loading.value = false;
     }
-}
+};
+
+const loadInitialSearch = async () => {
+    if (initialSearchComplete.value) return;
+    try {
+        loading.value = true;
+        const response = await searchPhotos(defaultSearch);
+        photos.value = response.results;
+        displayedSearchQuery.value = defaultSearch;
+        initialSearchComplete.value = true;
+    } catch (error) {
+        console.error('Error loading initial photos:', error);
+    } finally {
+        loading.value = false;
+    }
+};
+
+const openModal = (photo) => {
+    selectedPhoto.value = photo;
+    selectedPhotoIndex.value = photos.value.findIndex(p => p.id === photo.id);
+};
+
+const closeModal = () => {
+    selectedPhoto.value = null;
+    document.body.style.overflow = 'auto';
+};
+
+onMounted(loadInitialSearch);
 </script>

@@ -4,7 +4,7 @@
         <div class="overlay">
             <div class="photo-info">
                 <p> {{ item.user.name || 'Unknown Authur' }}</p>
-                <p class="">
+                <p class="location">
                     {{ item.user?.location || 'Unknown Location' }}
                 </p>
             </div>
