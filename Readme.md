@@ -11,5 +11,4 @@ An Unsplash-clone web application built with Vue 3 and Vite, allowing users to s
 ### Clone the Repository
 ```sh
 git clone https://github.com/payose/Unsplash-clone.git
-cd unsplash-clone
 ```
