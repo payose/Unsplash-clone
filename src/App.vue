@@ -66,7 +66,7 @@ const fetchPhotos = async () => {
         photos.value = response.results;
         hasSearched.value = true;
     } catch (err) {
-        console.error('Search failed:', err);
+        console.error(`Failed to load images of ${searchQuery.value}`, err);
     } finally {
         loading.value = false;
     }
@@ -80,8 +80,8 @@ const loadInitialSearch = async () => {
         photos.value = response.results;
         displayedSearchQuery.value = defaultSearch;
         initialSearchComplete.value = true;
-    } catch (error) {
-        console.error('Error loading initial photos:', error);
+    } catch (err) {
+        console.error(`Failed to load images of ${defaultSearch}`, err);
     } finally {
         loading.value = false;
     }
