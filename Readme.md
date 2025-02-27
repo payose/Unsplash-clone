@@ -12,3 +12,5 @@ An Unsplash-clone web application built with Vue 3 and Vite, allowing users to s
 ```sh
 git clone https://github.com/payose/Unsplash-clone.git
 ```
+### View deployed project
+https://comfy-dragon-e13769.netlify.app/
