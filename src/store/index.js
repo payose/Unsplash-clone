@@ -30,13 +30,14 @@ export const useSearchStore = defineStore('search', {
         },
 
         async loadInitialSearch() {
-            // if (this.initialSearchComplete) return;
+            if (this.initialSearchComplete && this.initialSearchResults.length > 0) return;
+            
             try {
                 this.loading = true;
                 const response = await searchPhotos(this.defaultSearch);
                 this.initialSearchResults = response.results;
 
-                // this.initialSearchComplete = true;
+                this.initialSearchComplete = true;
 
             } catch (err) {
                 console.error(`Failed to load ${this.defaultSearch} images`, err);
