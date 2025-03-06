@@ -318,3 +318,15 @@
     padding: 1px 10px;
     border-radius: 50%;
   }
+
+
+  .modal-fade-enter-active,
+  .modal-fade-leave-active {
+      transition: opacity 0.7s ease;
+  }
+  
+  .modal-fade-enter-from,
+  .modal-fade-leave-to {
+      opacity: 0;
+  }
+  

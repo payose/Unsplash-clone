@@ -1,42 +1,26 @@
 <template>
     <div class="carousel-container">
-        <swiper 
-        :slidesPerView="1" 
-            :centeredSlides="true"
-            :navigation="{
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            }"
-            :keyboard="{
-                enabled: true
-            }"
-            :modules="modules"
-            :grabCursor="true"
-            :effect="'creative'"
-            :creativeEffect="{
-                prev: {
-                    translate: ['-100%', 0, -1],
-                },
-                next: {
-                    translate: ['100%', 0, 0],
-                },
-            }"
-            :initialSlide="initialPhoto"
-            class="main-swiper"
-        >
+        <swiper :slidesPerView="1" :centeredSlides="true" :navigation="{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }" :keyboard="{
+            enabled: true
+        }" :modules="modules" :grabCursor="true" :effect="'creative'" :creativeEffect="{
+            prev: {
+                translate: ['-100%', 0, -1],
+            },
+            next: {
+                translate: ['100%', 0, 0],
+            },
+        }" :initialSlide="initialPhoto" class="main-swiper">
             <swiper-slide v-for="photo in photos" :key="photo.id" class="swiper-slide">
                 <div class="featured-image">
-                    <img 
-                        :src="getOptimizedImageUrl(photo.urls)"
-                        :srcset="`
-                            ${photo.urls.small} 400w,
-                            ${photo.urls.regular} 1080w,
-                            ${photo.urls.full} 2048w
-                        `"
-                        
-                        sizes="(max-width: 400px) 100vw, (max-width: 1080px) 50vw, 33vw"
-                        :alt="photo.description || 'Image'"
-                    />
+                    <img :src="getOptimizedImageUrl(photo.urls)" :srcset="`
+                        ${photo.urls.small} 400w,
+                        ${photo.urls.regular} 1080w,
+                        ${photo.urls.full} 2048w
+                    `" sizes="(max-width: 400px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                        :alt="photo.description || 'Image'" />
                     <div class="slider-photo-info">
                         <h3>{{ photo.user.name || 'Unknown Author' }}</h3>
                         <p class="location">{{ photo.user.location || 'Unknown Location' }}</p>
@@ -70,13 +54,13 @@ defineProps({
 });
 
 const getOptimizedImageUrl = (urls) => {
-  const viewportWidth = window.innerWidth;
-  if (viewportWidth < 768) return urls.small;
-  if (viewportWidth < 1200) return urls.regular;
-  return urls.full;
+    const viewportWidth = window.innerWidth;
+    if (viewportWidth < 768) return urls.small;
+    if (viewportWidth < 1200) return urls.regular;
+    return urls.full;
 };
 
-onMounted(()=>{
+onMounted(() => {
     document.querySelector('.swiper-wrapper').style.alignItems = 'center';
 });
 
@@ -84,7 +68,7 @@ const modules = [Navigation];
 
 </script>
 
-<style scoped>
+<style>
 .carousel-container {
     width: 100%;
     margin: 0 auto;
