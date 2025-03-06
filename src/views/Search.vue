@@ -23,7 +23,6 @@
     </section>
 </template>
 
-
 <script setup>
 import { ref } from 'vue';
 import MasonryWall from '@yeger/vue-masonry-wall';
