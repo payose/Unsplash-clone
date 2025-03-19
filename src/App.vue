@@ -3,14 +3,15 @@
         <header>
             <div class="search-container" :class="{ 'search-container-results': hasSearched }">
 
-                <!-- <h1 class="search-title">
-                    Search Results for <span>"{{ searchQuery }}"</span>
-                </h1> -->
-
                 <form action="" @submit.prevent="fetchPhotos">
                     <SearchBox v-model="searchQuery" />
                     <button type="submit" class="submit-button" aria-label="Search"></button>
                 </form>
+
+                <!-- <h1 class="search-title">
+                    Search Results for <span>"{{ searchQuery }}"</span>
+                </h1> -->
+
             </div>
         </header>
 

@@ -4,9 +4,9 @@
             type="text" 
             :value="modelValue"
             @input="$emit('update:modelValue', $event.target.value)"
-            placeholder="Search for photo" 
+            placeholder="Search for image" 
             class="search-input"
-            aria-label="Search for photos"
+            aria-label="Search for images"
         />
         <svg class="input-icon"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
